@@ -7,7 +7,12 @@ package arraystring;
 class _01_01_IsUnique {
 
     boolean isUnique(String str) {
-        throw new UnsupportedOperationException();
+        int[] chars = new int[256];
+        for(char c : str.toCharArray()) {
+            chars[c]++;
+            if(chars[c]>1) return false;
+        }
+        return true;
     }
 
 }

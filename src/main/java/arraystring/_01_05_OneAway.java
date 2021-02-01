@@ -12,8 +12,44 @@ package arraystring;
  * pale, bake -> false
  */
 class _01_05_OneAway {
-    boolean isOneAway(String a, String b) {
-        throw new UnsupportedOperationException();
+
+    int countAdd(String longer, String shorter) {
+        int fast=0, slow=0;
+        int diffs = 0;
+
+        while(fast<longer.length() && slow<shorter.length()) {
+            if(longer.charAt(fast) != shorter.charAt(slow)) {
+                diffs++;
+            } else {
+                slow++;
+            }
+            fast++;
+        }
+
+        return diffs;
     }
 
+    int countReplace(String a, String b) {
+        int diffs = 0;
+        for(int i=0; i<a.length(); i++) {
+            if(a.charAt(i) != b.charAt(i)) diffs++;
+        }
+
+        return diffs;
+    }
+
+    boolean isOneAway(String a, String b) {
+        if(Math.abs(a.length()-b.length()) > 1) return false;
+
+        switch(a.length()-b.length()) {
+            case 1:
+                return countAdd(a, b) < 2;
+            case -1:
+                return countAdd(b, a) < 2;
+            case 0:
+                return countReplace(a, b) < 2;
+            default:
+                return false;
+        }
+    }
 }

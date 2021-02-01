@@ -5,6 +5,21 @@ package arraystring;
  */
 class _01_02_CheckPermutation {
     boolean check(String a, String b) {
-        throw new UnsupportedOperationException();
+        int[] charsA = new int[256];
+        int[] charsB = new int[256];
+        
+        for (char c : a.toCharArray()) {
+            charsA[c]++;
+        }
+        
+        for(char c : b.toCharArray()) {
+            charsB[c]++;
+        }
+        
+        for(int i=0; i<256; i++) {
+            if(charsA[i] != charsB[i]) return false;
+        }
+
+        return true;
     }
 }

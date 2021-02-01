@@ -22,6 +22,7 @@ public class _01_09_StringRotationTest {
     @Test
     public void withRotated() {
         assertTrue(s.rotated("hello", "llohe"));
+        assertTrue(s.rotated("waterbottle", "erbottlewat"));
     }
 
     @Test

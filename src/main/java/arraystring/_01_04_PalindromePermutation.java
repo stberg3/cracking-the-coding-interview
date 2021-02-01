@@ -12,6 +12,17 @@ package arraystring;
  */
 class _01_04_PalindromePermutation {
     boolean check(String s) {
-        throw new UnsupportedOperationException();
+        char[] counts = new char[26];
+        int odds = 0;
+        
+        for(char c : s.toCharArray()) {
+            if(c != ' ') counts[c-'a']++;
+        }
+
+        for(int count : counts) {
+            odds += count % 2;
+        }
+
+        return odds < 2;
     }
 }
