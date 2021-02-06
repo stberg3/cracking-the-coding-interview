@@ -11,7 +11,7 @@ public class _02_02_ReturnKthToLastTest {
 
     @Test
     public void withOutOfScopeK() {
-        assertNull(s.kthToLast(LinkedListNode.of(1, 2, 3), 3));
+        assertNull(s.kthToLast(LinkedListNode.of(1, 2, 3), 7));
     }
 
     @Test
