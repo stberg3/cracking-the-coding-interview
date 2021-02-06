@@ -1,5 +1,8 @@
 package linkedlist;
 
+import java.util.Queue;
+import java.util.LinkedList;
+
 /**
  * Partition: Write code to partition a linked list around a value x,
  * such that all nodes less than x come before all nodes greater than or equal to x.
@@ -13,6 +16,34 @@ package linkedlist;
 class _02_04_Partition {
 
     LinkedListNode partition(LinkedListNode head, int x) {
-        throw new UnsupportedOperationException();
+        Queue<LinkedListNode> lt = new LinkedList<LinkedListNode>();
+        Queue<LinkedListNode> ge = new LinkedList<LinkedListNode>();
+
+        while(head != null) {
+            if(head.val < x) {
+                lt.add(head);
+            } else {
+                ge.add(head);
+            }
+            head = head.next;
+        }
+
+
+        head = lt.peek();
+        LinkedListNode ltLast = head;
+
+        while(!lt.isEmpty()) {
+            ltLast = lt.peek(); 
+            lt.poll().next = lt.peek();
+        }
+
+        ltLast.next = ge.peek();
+
+        while (!ge.isEmpty()) {
+            ge.poll().next = ge.peek();
+        }
+
+
+        return head;
     }
 }
