@@ -1,5 +1,9 @@
 package linkedlist;
 
+import java.util.Queue;
+import java.util.LinkedList;
+import java.lang.StringBuilder;
+
 /**
  * Sum Lists: You have two numbers represented by a linked list,
  * where each node contains a single digit.
@@ -12,8 +16,42 @@ package linkedlist;
  */
 class _02_05_SumList {
 
+    private int getInt(LinkedListNode head) {
+        StringBuilder numString = new StringBuilder();
+        
+        while(head != null) {
+            numString.append(String.valueOf(head.val));
+            head = head.next;
+        }
+
+        String s = numString.toString();
+        int res = Integer.parseInt(s);
+
+        return res;
+    }
+
+    private LinkedListNode getLinkedListNode(int num) {
+        String numString = String.valueOf(num);
+        Queue<LinkedListNode> nodes = new LinkedList<LinkedListNode>();
+
+        for(char c : numString.toCharArray()) {
+            nodes.add(new LinkedListNode(c - '0'));
+        }
+        LinkedListNode head = new LinkedListNode(-1);
+        LinkedListNode probe = nodes.poll();
+        head.next = probe;
+
+        while(!nodes.isEmpty()) {
+            probe.next = nodes.peek();
+            probe = nodes.poll();
+        }
+
+        return head.next;
+    }
+
     LinkedListNode sum(LinkedListNode l1, LinkedListNode l2) {
-        throw new UnsupportedOperationException();
+        if(l1 == null) return l2;
+        else return getLinkedListNode(getInt(l1) + getInt(l2));
     }
 
 }
