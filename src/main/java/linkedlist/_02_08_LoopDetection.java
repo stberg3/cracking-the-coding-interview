@@ -1,6 +1,8 @@
 package linkedlist;
 
 import java.util.Set;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -28,21 +30,42 @@ class _02_08_LoopDetection {
         public boolean equals(Object other) {
             return System.identityHashCode(l) ==  System.identityHashCode(l);
         }
+
+        public String toString() {
+            return Integer.toString(l.val);
+        }
     }
 
-    LinkedListNode detect(LinkedListNode head) {
-        Set<Reference> seen = new HashSet<Reference>();
+
+    private LinkedListNode nullImpl(LinkedListNode head) { 
+        LinkedListNode last = null;
+        LinkedListNode probe = head;
+    
+        while(probe != null) {
+            last = probe;
+            probe = probe.next;
+            last.next = null;
+        }
+
+        return last;
+    }
+
+    private LinkedListNode refImpl(LinkedListNode head) {
+        Set<Integer> seen = new HashSet<Integer>();
 
         LinkedListNode probe = head;
 
-        while(probe != null) {
-            Reference ref = new Reference(probe);
-            if(seen.contains(ref)) return ref.l;
-
-            seen.add(ref);
+        while (probe != null) {
+            if(seen.contains(probe.val)) return probe;
+            seen.add(probe.val);
             probe = probe.next;
         }
 
         return null;
+    }
+
+    LinkedListNode detect(LinkedListNode head) {
+        // return nullImpl(head);
+        return refImpl(head);
     }
 }
